@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wufumall.dataexporter.dao.DataExporterTaskDOMapper">
+	<resultMap id="BaseResultMap"
+		type="com.wufumall.dataexporter.entity.DataExporterTaskDO">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+		<result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="params" property="params" jdbcType="VARCHAR" />
+		<result column="redo_num" property="redoNum" jdbcType="INTEGER" />
+		<result column="user_account" property="userAccount" jdbcType="BIGINT" />
+		<result column="conf_id" property="confId" jdbcType="BIGINT" />
+		<result column="task_type" property="taskType" jdbcType="VARCHAR" />
+		<result column="version" property="version" jdbcType="INTEGER" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="app" property="app" jdbcType="VARCHAR" />
+        <result column="file_url" property="fileUrl" jdbcType="VARCHAR" />
+        <result column="own_sign" property="ownSign" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, gmt_create, gmt_modified, status, params, redo_num, user_account, conf_id,
+		task_type,
+		version, title, app, file_url, own_sign
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_data_exporter_task
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from t_data_exporter_task
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert"
+		parameterType="com.wufumall.dataexporter.entity.DataExporterTaskDO">
+		insert into t_data_exporter_task (id, gmt_create, gmt_modified,
+		status, params, redo_num,
+		user_account, conf_id, task_type,
+		version,title,app,file_url, own_sign)
+		values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP},
+		#{gmtModified,jdbcType=TIMESTAMP},
+		#{status,jdbcType=INTEGER}, #{params,jdbcType=VARCHAR}, #{redoNum,jdbcType=INTEGER},
+		#{userAccount,jdbcType=BIGINT}, #{confId,jdbcType=BIGINT},
+		#{taskType,jdbcType=VARCHAR},
+		#{version,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}
+		#{app,jdbcType=VARCHAR},
+		#{fileUrl,jdbcType=VARCHAR},
+        #{ownSign,jdbcType=VARCHAR}
+		)
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.wufumall.dataexporter.entity.DataExporterTaskDO">
+		insert into t_data_exporter_task
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="gmtCreate != null">
+				gmt_create,
+			</if>
+			<if test="gmtModified != null">
+				gmt_modified,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="params != null">
+				params,
+			</if>
+			<if test="redoNum != null">
+				redo_num,
+			</if>
+			<if test="userAccount != null">
+				user_account,
+			</if>
+			<if test="confId != null">
+				conf_id,
+			</if>
+			<if test="taskType != null">
+				task_type,
+			</if>
+			<if test="version != null">
+				version,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+            <if test="app != null">
+				app,
+			</if>
+            <if test="fileUrl != null">
+				file_url,
+			</if>
+            <if test="ownSign != null">
+				own_sign,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="gmtCreate != null">
+				#{gmtCreate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="gmtModified != null">
+				#{gmtModified,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="params != null">
+				#{params,jdbcType=VARCHAR},
+			</if>
+			<if test="redoNum != null">
+				#{redoNum,jdbcType=INTEGER},
+			</if>
+			<if test="userAccount != null">
+				#{userAccount,jdbcType=BIGINT},
+			</if>
+			<if test="confId != null">
+				#{confId,jdbcType=BIGINT},
+			</if>
+			<if test="taskType != null">
+				#{taskType,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				#{version,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+            <if test="app != null">
+				#{app,jdbcType=VARCHAR},
+			</if>
+			<if test="ownSign != null">
+				#{ownSign,jdbcType=VARCHAR},
+			</if>
+            <if test="fileUrl != null">
+				#{fileUrl,jdbcType=VARCHAR},
+			</if>
+		</trim>
+        <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+    </insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.wufumall.dataexporter.entity.DataExporterTaskDO">
+		update t_data_exporter_task
+		<set>
+			<if test="gmtCreate != null">
+				gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="gmtModified != null">
+				gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="params != null">
+				params = #{params,jdbcType=VARCHAR},
+			</if>
+			<if test="redoNum != null">
+				redo_num = #{redoNum,jdbcType=INTEGER},
+			</if>
+			<if test="userAccount != null">
+				user_account = #{userAccount,jdbcType=BIGINT},
+			</if>
+			<if test="confId != null">
+				conf_id = #{confId,jdbcType=BIGINT},
+			</if>
+			<if test="taskType != null">
+				task_type = #{taskType,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				version = #{version,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				title = #{title,jdbcType=VARCHAR},
+			</if>
+            <if test="app != null">
+				app = #{app,jdbcType=VARCHAR},
+			</if>
+			<if test="ownSign != null">
+				own_sign = #{ownSign,jdbcType=VARCHAR},
+			</if>
+			<if test="fileUrl != null">
+				file_url = #{fileUrl,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.wufumall.dataexporter.entity.DataExporterTaskDO">
+		update t_data_exporter_task
+		set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+		gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+		status = #{status,jdbcType=INTEGER},
+		params = #{params,jdbcType=VARCHAR},
+		redo_num = #{redoNum,jdbcType=INTEGER},
+		user_account = #{userAccount,jdbcType=BIGINT},
+		conf_id = #{confId,jdbcType=BIGINT},
+		task_type = #{taskType,jdbcType=VARCHAR},
+		version = #{version,jdbcType=INTEGER},
+		title = #{title,jdbcType=VARCHAR},
+		app = #{app,jdbcType=VARCHAR},
+		file_url = #{fileUrl,jdbcType=VARCHAR},
+		own_sign = #{ownSign,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+
+	<select id="selectBatchTasksByDynamic" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_data_exporter_task
+		<if test="_parameter != null">
+			<include refid="SELECT_DYNAMIC" />
+		</if>
+	</select>
+
+	<select id="selectTasksCountByDynamic" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		select
+		count(1) as count
+		from
+		t_data_exporter_task
+		<if test="_parameter != null">
+			<include refid="SELECT_DYNAMIC" />
+		</if>
+	</select>
+
+
+	<sql id="SELECT_DYNAMIC">
+		<if test="_parameter != null">
+			<where>
+				<trim prefix="(" suffix=")" prefixOverrides="and">
+					 <if test="shardingItem != null and shardingCount !=null ">
+						  id%#{shardingCount,jdbcType=INTEGER} = #{shardingItem,jdbcType=INTEGER}
+					</if>
+					<if test="gmtCreate != null">
+						AND gmt_create = #{gmtCreate,jdbcType=TIMESTAMP}
+					</if>
+					<if test="gmtModified != null">
+						AND gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+					</if>
+					<if test="status != null">
+						AND status = #{status,jdbcType=INTEGER}
+					</if>
+					<if test="params != null">
+						AND params = #{params,jdbcType=VARCHAR}
+					</if>
+					<if test="redoNum != null">
+						AND redo_num = #{redoNum,jdbcType=INTEGER}
+					</if>
+					<if test="userAccount != null">
+						AND user_account = #{userAccount,jdbcType=BIGINT}
+					</if>
+					<if test="confId != null">
+						AND conf_id = #{confId,jdbcType=BIGINT}
+					</if>
+					<if test="taskType != null">
+						AND task_type = #{taskType,jdbcType=VARCHAR}
+					</if>
+					<if test="version != null">
+						AND version = #{version,jdbcType=INTEGER}
+					</if>
+                    <if test="app != null">
+                        AND app = #{app,jdbcType=VARCHAR}
+                    </if>
+                    <if test="ownSign != null">
+                        AND own_sign = #{ownSign,jdbcType=VARCHAR}
+                    </if>
+                    <if test="fileUrl != null">
+                        AND file_url = #{fileUrl,jdbcType=VARCHAR}
+                    </if>
+					<if test="statusList != null ">
+						AND status IN
+						<foreach collection="statusList" item="status" open="("
+							separator="," close=")">
+							#{status}
+						</foreach>
+					</if>
+					<if test="idList != null ">
+						AND id IN
+						<foreach collection="idList" item="id" open="(" separator=","
+							close=")">
+							#{id}
+						</foreach>
+					</if>
+
+					<if test="startDate != null and startDate!=''">
+                        <![CDATA[AND gmt_create >= #{startDate,jdbcType=TIMESTAMP}]]>
+					</if>
+
+					<if test="endDate != null and endDate!=''">
+						AND gmt_create &lt; #{endDate,jdbcType=TIMESTAMP}
+					</if>
+					
+				</trim>
+			</where>
+			<if test="orderByField != null and orderByField!=''">
+				order by ${orderByField}
+			</if>
+
+			<if test="start != null and start!='' and limit != null and limit!=''">
+				limit ${start},${limit}
+			</if>
+		</if>
+	</sql>
+</mapper>

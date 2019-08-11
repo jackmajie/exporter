@@ -1,0 +1,97 @@
+server:
+  port: ${PORT:10200}
+  
+spring:
+  datasource :
+    driverClassName: com.mysql.jdbc.Driver
+    url : jdbc:mysql://192.168.1.235:3306/wufuo2o?characterEncoding=utf-8&useSSL=false
+    username : mywufu
+    password : aiwufu@2017
+    # 最多连接数量
+    maxActive: 300
+    # 没有使用时,回收的最长时间
+    maxWait: 10000
+    # 最多的空闲连接数
+    maxIdle: 1000
+    # 最少空闲连接数
+    minIdle: 100
+    # 初始连接数
+    initialSize: 10
+    # 是否自动回收超时连接
+    removeAbandoned: true
+    # 超时时间(以秒为单位)
+    removeAbandonedTimeout: 30
+    # 打开检查,用异步线程evict进行检查
+    testWhileIdle: true
+    # 获取连接前是否运行validationQuery,true=运行(默认),false=不运行
+    testOnBorrow: true
+    # 将连接归还连接池前是否运行validationQuery,true=运行,false=不运行(默认)
+    testOnReturn: false
+    # 检查连接,应用SQL语句执行之前运行一次
+    validationQuery: select 1
+    # 回收资源的数量
+    numTestsPerEvictionRun: 20
+    # 资源最小空闲时间
+    minEvictableIdleTimeMillis : 1800000
+      
+dubbo:
+  protocol :
+    #服务协议
+    name  : dubbo
+    #服务端口
+    port : 21882
+  application :
+    #提供方应用名称
+    name : exporter-service
+  registry :
+    #zookeeper注册中心的集群地址
+    address :  192.168.1.235:2181,192.168.1.235:2182,192.168.1.235:2183
+    #注册中心
+    protocol : zookeeper
+    #dubbo服务所在包
+  packageName : com.wufumall.dataexporter.service
+#  server :
+#      port : 20080
+  provider :
+      #注册中心请求超时时间(毫秒)
+      timeout : 3000
+      
+      
+regCenter:
+  serverList: 192.168.1.235:2181,192.168.1.235:2182,192.168.1.235:2183
+  namespace: elastic_job_dev
+
+  
+reloadConfigJob:
+  cron: 0 0/5 * * * ?
+  shardingTotalCount: 2
+  shardingItemParameters: 0=Beijing,1=Shanghai    
+  
+taskCollectionConfig:
+  cron: 0/30 * * * * ?
+  shardingTotalCount: 2
+  shardingItemParameters: 0=Beijing,1=Shanghai 
+  
+cleanDataJobConfig:
+  cron: 0 0 2 * * ?
+  shardingTotalCount: 2
+  shardingItemParameters: 0=Beijing,1=Shanghai       
+  
+  
+mcc.exporter.module: Dataexporter
+mcc.zk.address: 192.168.1.235:2181,192.168.1.235:2182,192.168.1.235:2183
+
+mongodb:
+  grid-fs-database: dataexporter  # GridFS 数据库名
+  host: 192.168.1.235
+  port: 27017
+  username: admin
+  password: password
+  connectionsPerHost: 200
+  threads-allowed-to-block-for-connection-multiplier: 100
+  connect-timeout: 3000
+  max-wait-time:  5000
+  socket-keep-alive: true
+  socket-timeout: 5000
+  write-number: 1
+  write-timeout: 0

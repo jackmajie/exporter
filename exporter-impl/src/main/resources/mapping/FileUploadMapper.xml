@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.midea.trade.erp.model.dao.FileUploadMapper" >
+  <resultMap id="BaseResultMap" type="com.midea.trade.erp.model.dataobject.alipay.FileUpload" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="md5" property="md5" jdbcType="VARCHAR" />
+    <result column="length" property="length" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="onwer" property="onwer" jdbcType="VARCHAR" />
+    <result column="gmt_expire" property="gmtExpire" jdbcType="TIMESTAMP" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, type, name, path, md5, length, status, onwer, gmt_expire, gmt_create, gmt_modify
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from r_file_upload
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from r_file_upload
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.midea.trade.erp.model.dataobject.alipay.FileUpload" >
+    insert into r_file_upload (id, type, name, 
+      path, md5, length, status, 
+      onwer, gmt_expire, gmt_create, 
+      gmt_modify)
+    values (#{id,jdbcType=BIGINT}, #{type,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{path,jdbcType=VARCHAR}, #{md5,jdbcType=VARCHAR}, #{length,jdbcType=BIGINT}, #{status,jdbcType=TINYINT}, 
+      #{onwer,jdbcType=VARCHAR}, #{gmtExpire,jdbcType=TIMESTAMP}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtModify,jdbcType=TIMESTAMP})
+  </insert>
+  
+  <insert id="insertReturnId" parameterType="com.midea.trade.erp.model.dataobject.alipay.FileUpload" >
+      <selectKey resultType="long" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+    insert into r_file_upload (id,type, name, 
+      path, md5, length, status, 
+      onwer, gmt_expire, gmt_create, 
+      gmt_modify)
+    values (#{id,jdbcType=BIGINT}, #{type,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{path,jdbcType=VARCHAR}, #{md5,jdbcType=VARCHAR}, #{length,jdbcType=BIGINT}, #{status,jdbcType=TINYINT}, 
+      #{onwer,jdbcType=VARCHAR}, #{gmtExpire,jdbcType=TIMESTAMP}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtModify,jdbcType=TIMESTAMP})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.midea.trade.erp.model.dataobject.alipay.FileUpload" >
+    insert into r_file_upload
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="path != null" >
+        path,
+      </if>
+      <if test="md5 != null" >
+        md5,
+      </if>
+      <if test="length != null" >
+        length,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="onwer != null" >
+        onwer,
+      </if>
+      <if test="gmtExpire != null" >
+        gmt_expire,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModify != null" >
+        gmt_modify,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="md5 != null" >
+        #{md5,jdbcType=VARCHAR},
+      </if>
+      <if test="length != null" >
+        #{length,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="onwer != null" >
+        #{onwer,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtExpire != null" >
+        #{gmtExpire,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModify != null" >
+        #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.midea.trade.erp.model.dataobject.alipay.FileUpload" >
+    update r_file_upload
+    <set >
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="md5 != null" >
+        md5 = #{md5,jdbcType=VARCHAR},
+      </if>
+      <if test="length != null" >
+        length = #{length,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="onwer != null" >
+        onwer = #{onwer,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtExpire != null" >
+        gmt_expire = #{gmtExpire,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModify != null" >
+        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.midea.trade.erp.model.dataobject.alipay.FileUpload" >
+    update r_file_upload
+    set type = #{type,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      md5 = #{md5,jdbcType=VARCHAR},
+      length = #{length,jdbcType=BIGINT},
+      status = #{status,jdbcType=TINYINT},
+      onwer = #{onwer,jdbcType=VARCHAR},
+      gmt_expire = #{gmtExpire,jdbcType=TIMESTAMP},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modify = #{gmtModify,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectFileUpload" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select
+       <include refid="Base_Column_List"/>
+    from r_file_upload
+       <if test="_parameter != null">
+         <include refid="SELECT_DYNAMIC"/>
+       </if>
+    </select>
+
+  <sql id="SELECT_DYNAMIC">
+    <if test="_parameter != null">
+      <where>
+        <trim prefix="(" suffix=")" prefixOverrides="and">
+
+          <if test="type != null" >
+            AND  type = #{type,jdbcType=VARCHAR}
+          </if>
+          <if test="name != null" >
+            AND name = #{name,jdbcType=VARCHAR}
+          </if>
+          <if test="path != null" >
+            AND  path = #{path,jdbcType=VARCHAR}
+          </if>
+          <if test="md5 != null" >
+            AND md5 = #{md5,jdbcType=VARCHAR}
+          </if>
+          <if test="length != null" >
+            AND length = #{length,jdbcType=BIGINT}
+          </if>
+          <if test="status != null" >
+            AND status = #{status,jdbcType=TINYINT}
+          </if>
+          <if test="onwer != null" >
+            AND onwer = #{onwer,jdbcType=VARCHAR}
+          </if>
+          <if test="gmtExpire != null" >
+            AND gmt_expire = #{gmtExpire,jdbcType=TIMESTAMP}
+          </if>
+          <if test="gmtCreate != null" >
+            AND  gmt_create = #{gmtCreate,jdbcType=TIMESTAMP}
+          </if>
+          <if test="gmtModify != null" >
+            AND gmt_modify = #{gmtModify,jdbcType=TIMESTAMP}
+          </if>
+
+          <if test="statusList != null and statusList !=''">
+            AND status IN
+            <foreach collection="statusList" item="status" open="(" separator="," close=")">
+              #{status}
+            </foreach>
+          </if>
+        </trim>
+      </where>
+    </if>
+  </sql>
+
+	<update id="updateStatusByIds">
+		update r_file_upload
+		set status = #{status,jdbcType=TINYINT} 
+		where id in
+		<foreach collection="fileIds" item="id" index="index"
+			open="(" close=")" separator=",">
+			#{id,jdbcType=BIGINT}
+		</foreach>
+	</update>
+	
+	<select id="selectFileIdByStatus" resultType="java.lang.Long" >
+    	select id from r_file_upload where status in
+    	<foreach collection="statusList" item="status" index="index"
+			open="(" close=")" separator=",">
+			#{status,jdbcType=TINYINT}
+		</foreach>
+    </select>
+</mapper>
