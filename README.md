@@ -3,6 +3,12 @@
 
 
 
+
+
+![Image text](https://github.com/chenjy16/exporter/blob/master/export.png)
+
+
+
 一、背景
 
 1.	使用场景
