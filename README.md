@@ -38,6 +38,11 @@ COUPOND_INFO_LIST_01
 Zookeeper配置文件路径/ConfigCenter/Dataexporter/defaultMultiConf
 0.0.4为第4步中的导出回调实现类的duboo服务版本
  
+ 
+ 
+ 
+
+ 
  (3) 创建导出任务
 创建导出任务，任务标识为COUPOND_INFO_LIST_01，然后等待导出。
  
@@ -71,3 +76,4 @@ data节点下的数据是数组格式的,每一个数组代表Excel中的一行�
 
 
 
+交流群：303216689
